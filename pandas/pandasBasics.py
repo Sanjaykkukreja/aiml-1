@@ -105,3 +105,68 @@ Wed    5
 Thu    7
 Name: apples, dtype: int64
 '''
+
+# Grab data by slicing a colum
+print (count['oranges'].loc['Tue'])
+'''
+8
+'''
+print (count['oranges'].iloc[1])
+'''
+8
+'''
+
+# Add a new dataframe to an existing dataframe
+data_a = {
+        'apples': [1,2,3],
+        'oranges': [4,5,6]
+        }
+count_a = pd.DataFrame(data_a, index=['Fri','Sat','Sun'])
+print (count_a)
+'''
+     apples  oranges
+Fri       1        4
+Sat       2        5
+Sun       3        6
+'''
+
+new_count = count.append(count_a)
+print(new_count)
+'''
+     apples  oranges
+Mon       3        1
+Tue       2        8
+Wed       5        4
+Thu       7        0
+Fri       1        4
+Sat       2        5
+Sun       3        6
+'''
+
+# Adding an new column to exiting dataframe with unqual data in columns
+data_a = {
+        'apples': [1,2,3],
+        'oranges': [4,5,6],
+        'kiwi': [7,8,9]
+        }
+count_a = pd.DataFrame(data_a, index=['Fri','Sat','Sun'])
+print(count_a)
+'''
+     apples  oranges  kiwi
+Fri       1        4     7
+Sat       2        5     8
+Sun       3        6     9
+'''
+
+new_count = count.append(count_a)
+print (new_count)
+'''
+     apples  kiwi  oranges
+Mon       3   NaN        1
+Tue       2   NaN        8
+Wed       5   NaN        4
+Thu       7   NaN        0
+Fri       1   7.0        4
+Sat       2   8.0        5
+Sun       3   9.0        6
+'''
